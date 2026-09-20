@@ -3,192 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRADE TERMINAL | Market Intelligence</title>
+    <title>BLOOMBERG MARKET TERMINAL | MVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-main: #0B0E11;
-            --bg-panel: #11151A;
-            --border: #242A31;
-            --text-primary: #E6E8EB;
-            --text-secondary: #8B949E;
-            --accent: #10B981;
-        }
         body { 
-            background-color: var(--bg-main); 
-            color: var(--text-primary); 
-            font-family: 'Inter', sans-serif; 
+            background-color: #000000; 
+            color: #FFB000; /* Bloomberg Amber */
+            font-family: 'JetBrains Mono', monospace; 
             margin: 0; 
+            padding: 0;
             overflow-x: hidden;
         }
-        .panel { 
-            background-color: var(--bg-panel); 
-            border: 1px solid var(--border); 
-            border-radius: 4px; 
+        .bb-panel { 
+            background-color: #0c0c0c; 
+            border: 1px solid #333333; 
         }
-        .nav-link { 
-            color: var(--text-secondary);
+        .bb-header {
+            background-color: #FFB000;
+            color: #000000;
+            font-weight: bold;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .bb-btn {
+            background-color: #111111;
+            color: #FFB000;
+            border: 1px solid #FFB000;
+            padding: 4px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.875rem;
-            font-weight: 600;
-            padding: 0.5rem 0;
+            text-transform: uppercase;
         }
-        .nav-link:hover { color: var(--accent); }
-        .nav-active { 
-            color: var(--accent); 
-            border-bottom: 2px solid var(--accent);
+        .bb-btn.active, .bb-btn:hover {
+            background-color: #FFB000;
+            color: #000000;
+            font-weight: bold;
         }
-        .ticker-bar {
-            height: 40px;
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-main);
-        }
+        .bb-text-green { color: #00FF00; }
+        .bb-text-red { color: #FF0055; }
+        .bb-text-white { color: #FFFFFF; }
+        
         /* Mobile Navbar */
         .mobile-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--bg-panel);
-            border-top: 1px solid var(--border);
+            background: #0c0c0c;
+            border-top: 1px solid #333333;
             display: flex;
             justify-content: space-around;
-            padding: 0.75rem 0;
+            padding: 8px 0;
             z-index: 50;
         }
-        .mobile-nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-        }
-        .mobile-nav-item.active { color: var(--accent); }
-        
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
-            .main-content { padding-bottom: 80px; }
+            .main-container { padding-bottom: 70px; }
         }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- TICKER BAR (PRD Section 6) -->
-    <div class="ticker-bar">
-        <div class="tradingview-widget-container">
+    <!-- TOP TICKER BAR (Bloomberg Style) -->
+    <div class="bg-black border-b border-[#333333] h-8 overflow-hidden flex items-center">
+        <div class="tradingview-widget-container w-full">
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
             {
                 "symbols": [
                     {"proName": "BINANCE:BTCUSDT", "title": "BTC/USDT"},
                     {"proName": "BINANCE:ETHUSDT", "title": "ETH/USDT"},
-                    {"proName": "BINANCE:SOLUSDT", "title": "SOL/USDT"},
                     {"proName": "OANDA:XAUUSD", "title": "GOLD"},
                     {"proName": "NASDAQ:IXIC", "title": "NASDAQ"},
-                    {"proName": "FX:EURUSD", "title": "EUR/USD"}
+                    {"proName": "FX:EURUSD", "title": "EUR/USD"},
+                    {"proName": "BINANCE:SOLUSDT", "title": "SOL/USDT"}
                 ],
-                "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": true, "displayMode": "adaptive", "locale": "id"
+                "showSymbolLogo": false, "colorTheme": "dark", "isTransparent": true, "displayMode": "adaptive", "locale": "id"
             }
             </script>
         </div>
     </div>
 
-    <!-- DESKTOP HEADER (PRD Section 4/5) -->
-    <header class="desktop-nav bg-[#11151A] border-b border-[#242A31] px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-8">
-            <div class="text-xl font-bold tracking-tighter text-emerald-400">TRADE TERMINAL</div>
-            <nav class="flex gap-6">
-                <div onclick="switchTab('dashboard')" id="d-nav-dashboard" class="nav-link nav-active">DASHBOARD</div>
-                <div onclick="switchTab('markets')" id="d-nav-markets" class="nav-link">MARKETS</div>
-                <div onclick="switchTab('news')" id="d-nav-news" class="nav-link">NEWS</div>
-                <div onclick="switchTab('calendar')" id="d-nav-calendar" class="nav-link">CALENDAR</div>
-            </nav>
+    <!-- DESKTOP TERMINAL HEADER -->
+    <header class="desktop-nav bg-[#0c0c0c] border-b border-[#333333] px-4 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-6">
+            <div class="text-black bg-[#FFB000] px-2 py-0.5 font-bold text-sm tracking-widest">BBG TERMINAL</div>
+            <div class="flex gap-2">
+                <button onclick="switchTab('dashboard')" id="d-btn-dashboard" class="bb-btn active">1. DASHBOARD</button>
+                <button onclick="switchTab('markets')" id="d-btn-markets" class="bb-btn">2. MARKETS</button>
+                <button onclick="switchTab('news')" id="d-btn-news" class="bb-btn">3. NEWS</button>
+                <button onclick="switchTab('calendar')" id="d-btn-calendar" class="bb-btn">4. CALENDAR</button>
+            </div>
         </div>
-        <div class="flex items-center gap-4">
-            <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Market Monitoring Only</div>
+        <div class="text-[11px] text-[#00FF00] flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-[#00FF00] animate-pulse"></span>
+            SYSTEM ONLINE // NO TRADING EXECUTION
         </div>
     </header>
 
     <!-- MOBILE HEADER -->
-    <header class="md:hidden flex justify-between items-center px-4 py-3 bg-[#11151A] border-b border-[#242A31]">
-        <div class="text-lg font-bold text-emerald-400 italic">TRADE TERMINAL</div>
-        <div class="text-[10px] text-slate-500 font-mono">MVP v1.0</div>
+    <header class="md:hidden bg-[#0c0c0c] border-b border-[#333333] px-4 py-2 flex justify-between items-center">
+        <div class="text-black bg-[#FFB000] px-2 py-0.5 font-bold text-xs">BBG TERMINAL</div>
+        <div class="text-[10px] text-[#00FF00]">● LIVE MONITOR</div>
     </header>
 
-    <main class="main-content p-2 md:p-6">
+    <!-- MAIN CONTENT -->
+    <main class="main-container p-2 md:p-4">
         
         <!-- DASHBOARD TAB -->
-        <div id="tab-dashboard" class="tab-content grid grid-cols-1 lg:grid-cols-4 gap-4">
-            <!-- Watchlist Left (PRD Section 7) -->
-            <div class="lg:col-span-1 panel h-[400px] md:h-[650px] overflow-hidden">
-                <div class="tradingview-widget-container" style="height:100%;width:100%">
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-                    {
-                        "colorTheme": "dark", "dateRange": "12M", "showChart": false, "locale": "id", "width": "100%", "height": "100%", "largeChartUrl": "", "isTransparent": true,
-                        "tabs": [
-                            {
-                                "title": "Watchlist",
+        <div id="tab-dashboard" class="tab-content grid grid-cols-1 lg:grid-cols-4 gap-3">
+            
+            <!-- WATCHLIST PANEL -->
+            <div class="lg:col-span-1 bb-panel h-[400px] md:h-[620px] flex flex-col">
+                <div class="bb-header">WATCHLIST & MONITOR</div>
+                <div class="flex-1 overflow-hidden p-1">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                        {
+                            "colorTheme": "dark", "dateRange": "12M", "showChart": false, "locale": "id", "width": "100%", "height": "100%", "isTransparent": true,
+                            "tabs": [{
+                                "title": "Assets",
                                 "symbols": [
                                     {"s": "BINANCE:BTCUSDT"}, {"s": "BINANCE:ETHUSDT"}, {"s": "BINANCE:SOLUSDT"},
                                     {"s": "OANDA:XAUUSD"}, {"s": "FX:EURUSD"}, {"s": "NASDAQ:QQQ"},
                                     {"s": "BINANCE:DOGEUSDT"}, {"s": "BINANCE:XRPUSDT"}
                                 ]
-                            }
-                        ]
-                    }
-                    </script>
+                            }]
+                        }
+                        </script>
+                    </div>
                 </div>
             </div>
 
-            <!-- Main Chart Center (PRD Section 8) -->
-            <div class="lg:col-span-2 panel h-[450px] md:h-[650px] overflow-hidden">
-                <div class="tradingview-widget-container" style="height:100%;width:100%">
-                    <div id="tradingview_main" style="height:100%;width:100%"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "60", "timezone": "Etc/UTC", "theme": "dark", "style": "1", "locale": "id",
-                            "toolbar_bg": "#f1f3f6", "enable_publishing": false, "hide_side_toolbar": false, "allow_symbol_change": true, "container_id": "tradingview_main"
-                        });
-                    </script>
+            <!-- MAIN CHART PANEL -->
+            <div class="lg:col-span-2 bb-panel h-[450px] md:h-[620px] flex flex-col">
+                <div class="bb-header flex justify-between items-center">
+                    <span>CHART ANALYSIS (TRADINGVIEW)</span>
+                    <span class="text-[10px] text-white">M1 / H1 / D1</span>
+                </div>
+                <div class="flex-1 overflow-hidden">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <div id="tradingview_bbg" style="height:100%;width:100%"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                        <script type="text/javascript">
+                            new TradingView.widget({
+                                "autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "60", "timezone": "Etc/UTC", "theme": "dark", "style": "1", "locale": "id",
+                                "toolbar_bg": "#000000", "enable_publishing": false, "hide_side_toolbar": false, "allow_symbol_change": true, "container_id": "tradingview_bbg"
+                            });
+                        </script>
+                    </div>
                 </div>
             </div>
 
-            <!-- News Right (PRD Section 11) -->
-            <div class="lg:col-span-1 panel h-[400px] md:h-[650px] overflow-hidden">
-                <div class="tradingview-widget-container">
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-                    {
-                        "feedMode": "all_symbols", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "id"
-                    }
-                    </script>
+            <!-- NEWS FEED PANEL -->
+            <div class="lg:col-span-1 bb-panel h-[400px] md:h-[620px] flex flex-col">
+                <div class="bb-header">MARKET INTELLIGENCE NEWS</div>
+                <div class="flex-1 overflow-hidden p-1">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                        {
+                            "feedMode": "all_symbols", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "id"
+                        }
+                        </script>
+                    </div>
                 </div>
             </div>
+
         </div>
 
-        <!-- MARKETS TAB (PRD Section 15) -->
-        <div id="tab-markets" class="tab-content hidden h-[80vh] panel">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <!-- MARKETS TAB -->
+        <div id="tab-markets" class="tab-content hidden h-[80vh] bb-panel flex flex-col">
+            <div class="bb-header">MARKETS SCREENER</div>
+            <div class="flex-1 overflow-hidden">
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
                 { "width": "100%", "height": "100%", "defaultColumn": "overview", "screener_type": "crypto_mkt", "displayCurrency": "USD", "colorTheme": "dark", "locale": "id" }
                 </script>
             </div>
         </div>
 
-        <!-- NEWS TAB (PRD Section 10/12) -->
-        <div id="tab-news" class="tab-content hidden h-[80vh] panel">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <!-- NEWS TAB -->
+        <div id="tab-news" class="tab-content hidden h-[80vh] bb-panel flex flex-col">
+            <div class="bb-header">GLOBAL NEWS FEED</div>
+            <div class="flex-1 overflow-hidden">
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
                 { "feedMode": "market", "market": "crypto", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "id" }
                 </script>
             </div>
         </div>
 
-        <!-- CALENDAR TAB (PRD Section 16) -->
-        <div id="tab-calendar" class="tab-content hidden h-[80vh] panel">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <!-- CALENDAR TAB -->
+        <div id="tab-calendar" class="tab-content hidden h-[80vh] bb-panel flex flex-col">
+            <div class="bb-header">ECONOMIC CALENDAR</div>
+            <div class="flex-1 overflow-hidden">
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
                 { "colorTheme": "dark", "isTransparent": true, "width": "100%", "height": "100%", "locale": "id", "importanceFilter": "-1,0,1" }
                 </script>
@@ -197,39 +206,26 @@
 
     </main>
 
-    <!-- MOBILE NAV (PRD Section 20) -->
+    <!-- MOBILE NAVIGATION -->
     <nav class="mobile-nav md:hidden">
-        <div onclick="switchTab('dashboard')" id="m-nav-dashboard" class="mobile-nav-item active">
-            <span class="text-[10px]">DASHBOARD</span>
-        </div>
-        <div onclick="switchTab('markets')" id="m-nav-markets" class="mobile-nav-item">
-            <span class="text-[10px]">MARKETS</span>
-        </div>
-        <div onclick="switchTab('news')" id="m-nav-news" class="mobile-nav-item">
-            <span class="text-[10px]">NEWS</span>
-        </div>
-        <div onclick="switchTab('calendar')" id="m-nav-calendar" class="mobile-nav-item">
-            <span class="text-[10px]">CALENDAR</span>
-        </div>
+        <button onclick="switchTab('dashboard')" id="m-btn-dashboard" class="bb-btn active text-[10px]">DASHBOARD</button>
+        <button onclick="switchTab('markets')" id="m-btn-markets" class="bb-btn text-[10px]">MARKETS</button>
+        <button onclick="switchTab('news')" id="m-btn-news" class="bb-btn text-[10px]">NEWS</button>
+        <button onclick="switchTab('calendar')" id="m-btn-calendar" class="bb-btn text-[10px]">CALENDAR</button>
     </nav>
 
     <script>
         function switchTab(name) {
-            // Hide all tab content
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            // Remove active state from all navs
-            document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(el => el.classList.remove('nav-active', 'active'));
+            document.querySelectorAll('.bb-btn').forEach(el => el.classList.remove('active'));
             
-            // Show target content
             document.getElementById('tab-' + name).classList.remove('hidden');
             
-            // Activate Desktop Nav
-            const dNav = document.getElementById('d-nav-' + name);
-            if (dNav) dNav.classList.add('nav-active');
+            const dBtn = document.getElementById('d-btn-' + name);
+            if(dBtn) dBtn.classList.add('active');
             
-            // Activate Mobile Nav
-            const mNav = document.getElementById('m-nav-' + name);
-            if (mNav) mNav.classList.add('active');
+            const mBtn = document.getElementById('m-btn-' + name);
+            if(mBtn) mBtn.classList.add('active');
 
             window.scrollTo(0, 0);
         }
