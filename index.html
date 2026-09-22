@@ -97,6 +97,7 @@
                 <button onclick="switchTab('news')" id="d-btn-news" class="bb-btn">3. NEWS</button>
                 <button onclick="switchTab('calendar')" id="d-btn-calendar" class="bb-btn">4. CALENDAR</button>
                 <button onclick="switchTab('advisor')" id="d-btn-advisor" class="bb-btn">5. ADVISOR</button>
+                <button onclick="switchTab('markets')" id="d-btn-markets" class="bb-btn">6. MARKETS & FED</button>
             </div>
         </div>
         <div class="text-[11px] text-[#00FF00] flex items-center gap-2">
@@ -285,6 +286,65 @@
             </div>
         </div>
 
+        <!-- MARKETS & MACRO (YAHOO FINANCE & GLOBAL INDICES) -->
+        <div id="tab-markets" class="tab-content hidden flex flex-col gap-4">
+            <div class="bb-header flex justify-between items-center">
+                <span>GLOBAL MACRO & MARKET OVERVIEW // YAHOO FINANCE & INDEX BENCHMARKS</span>
+                <span class="text-[10px] text-white">CROSS-ASSET TRACKING</span>
+            </div>
+            
+            <div class="bb-panel h-[480px] flex flex-col">
+                <div class="bb-header">WALL STREET & GLOBAL INDICES OVERVIEW</div>
+                <div class="flex-1 overflow-hidden p-1">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+                        {
+                            "width": "100%", "height": "100%",
+                            "symbolsGroups": [
+                                {
+                                    "name": "Indices",
+                                    "originalName": "Indices",
+                                    "symbols": [
+                                        {"name": "FOREXCOM:SPXUSD", "displayName": "S&P 500"},
+                                        {"name": "FOREXCOM:DJI", "displayName": "Dow Jones 30"},
+                                        {"name": "FOREXCOM:NSXUSD", "displayName": "Nasdaq 100"},
+                                        {"name": "OANDA:XAUUSD", "displayName": "Gold (XAU/USD)"},
+                                        {"name": "NYMEX:CL1!", "displayName": "Crude Oil WTI"}
+                                    ]
+                                },
+                                {
+                                    "name": "Crypto",
+                                    "originalName": "Crypto",
+                                    "symbols": [
+                                        {"name": "BINANCE:BTCUSDT", "displayName": "Bitcoin"},
+                                        {"name": "BINANCE:ETHUSDT", "displayName": "Ethereum"},
+                                        {"name": "BINANCE:SOLUSDT", "displayName": "Solana"}
+                                    ]
+                                }
+                            ],
+                            "showSymbolLogo": true, "isTransparent": true, "colorTheme": "dark", "locale": "id"
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MACRO HIGHLIGHTS / YAHOO FINANCE FEED -->
+            <div class="bb-panel p-4 flex flex-col gap-2">
+                <div class="bb-header">FED & MACROECONOMIC INTELLIGENCE (YAHOO FINANCE INSIGHTS)</div>
+                <div class="text-xs space-y-2 text-[#FFB000]">
+                    <div class="border-b border-[#333] pb-2">
+                        <span class="text-white font-bold">[BREAKING] The Federal Reserve Hikes Interest Rates:</span>
+                        <p class="text-gray-300 mt-0.5">The Fed menaikkan suku bunga pertama kali dalam 3 tahun secara bulat. S&P 500 terkoreksi (-0.89%), Nasdaq (-0.52%), dan Gold turun (-0.94%). Tekanan suku bunga memperkuat yield obligasi AS dan memperlambat aset berisiko tinggi.</p>
+                    </div>
+                    <div class="border-b border-[#333] pb-2">
+                        <span class="text-white font-bold">[MACRO INSIGHT] Dampak Terhadap Meme Coin & Trading:</span>
+                        <p class="text-gray-300 mt-0.5">Likuiditas spekulatif global berkurang saat suku bunga naik. Guard risk Tauric (SL 15%, Trailing 8%, Max 3 Slot) otomatis membatasi paparan modal agar tetap aman saat volatilitas pasar tinggi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- MOBILE NAVIGATION -->
@@ -294,6 +354,7 @@
         <button onclick="switchTab('news')" id="m-btn-news" class="bb-btn text-[10px]">NEWS</button>
         <button onclick="switchTab('calendar')" id="m-btn-calendar" class="bb-btn text-[10px]">CALENDAR</button>
         <button onclick="switchTab('advisor')" id="m-btn-advisor" class="bb-btn text-[10px]">ADVISOR</button>
+        <button onclick="switchTab('markets')" id="m-btn-markets" class="bb-btn text-[10px]">MARKETS</button>
     </nav>
 
     <script>
