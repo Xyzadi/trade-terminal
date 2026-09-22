@@ -98,6 +98,7 @@
                 <button onclick="switchTab('calendar')" id="d-btn-calendar" class="bb-btn">4. CALENDAR</button>
                 <button onclick="switchTab('advisor')" id="d-btn-advisor" class="bb-btn">5. ADVISOR</button>
                 <button onclick="switchTab('markets')" id="d-btn-markets" class="bb-btn">6. MARKETS & FED</button>
+                <button onclick="switchTab('myfxbook')" id="d-btn-myfxbook" class="bb-btn">7. MYFXBOOK</button>
             </div>
         </div>
         <div class="text-[11px] text-[#00FF00] flex items-center gap-2">
@@ -286,7 +287,29 @@
             </div>
         </div>
 
-        <!-- MARKETS & MACRO (YAHOO FINANCE & GLOBAL INDICES) -->
+        <!-- MYFXBOOK TAB -->
+        <div id="tab-myfxbook" class="tab-content hidden h-[80vh] bb-panel flex flex-col">
+            <div class="bb-header">MYFXBOOK INDONESIA</div>
+            <div class="p-3 flex flex-col gap-3 text-xs">
+                <!-- Live Economic Calendar -->
+                <div class="bb-header p-1">Kalender Ekonomi Real-Time (Myfxbook)</div>
+                <div class="space-y-1 text-[#FFB000]">
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">🇮🇩 ID: Suku Bunga BI</span><span>5.75%</span></div>
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">🇲🇽 MX: Banco de México</span><span>6.5%</span></div>
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">🇧🇷 BR: Banco Central do Brasil</span><span>13.75% → 14.0%</span></div>
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">🇳🇿 NZ: Lelang Obligasi</span><span>3.57%</span></div>
+                    <div class="flex justify-between"><span class="text-white">🇳🇱 NL: Keyakinan Konsumen (Sep)</span><span>-34</span></div>
+                </div>
+                <!-- Copy Trade Leaderboard -->
+                <div class="bb-header p-1">Copy Trading Leaderboard & Strategy</div>
+                <div class="space-y-1 text-[#FFB000]">
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">TGE - AP Trades</span><span class="text-green-400">+10.07%</span></div>
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">EGA Trade Panel</span><span class="text-green-400">+95.56%</span></div>
+                    <div class="flex justify-between border-b border-[#333] pb-1"><span class="text-white">Mtrader grid4 v3.1.33</span><span class="text-gray-300">Strategy</span></div>
+                    <div class="flex justify-between"><span class="text-white">Strategy9 v1.1.1</span><span class="text-green-400">+30%</span></div>
+                </div>
+            </div>
+        </div>
         <div id="tab-markets" class="tab-content hidden flex flex-col gap-4">
             <div class="bb-header flex justify-between items-center">
                 <span>GLOBAL MACRO & MARKET OVERVIEW // YAHOO FINANCE & INDEX BENCHMARKS</span>
@@ -355,6 +378,7 @@
         <button onclick="switchTab('calendar')" id="m-btn-calendar" class="bb-btn text-[10px]">CALENDAR</button>
         <button onclick="switchTab('advisor')" id="m-btn-advisor" class="bb-btn text-[10px]">ADVISOR</button>
         <button onclick="switchTab('markets')" id="m-btn-markets" class="bb-btn text-[10px]">MARKETS</button>
+        <button onclick="switchTab('myfxbook')" id="m-btn-myfxbook" class="bb-btn text-[10px]">MYFXBOOK</button>
     </nav>
 
     <script>
